@@ -34,9 +34,12 @@ class Full4MoviesProvider : MainAPI() { // all providers must be an instance of 
     }
 
     private fun Element.toSearchResult(): SearchResponse? {
-        val title = this.selectFirst("img")?.attr("title") ?: return null
+        val title = this.selectFirst("div.like-table.div")?.text() ?: return null
         val href = fixUrl(this.selectFirst("a")?.attr("href").toString())
-        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
+        val poster = fixUrlNull(this.selectFirst("div.search-block-placeholder")?.attr("style"))
+        val split1 = poster.indexOf("(") + 1
+        val split2 = poster.indexOf(")") 
+        val posterUrl = poster.substring(split1,split2)
 
         return newMovieSearchResponse(title, href, TvType.Movie) {
             this.posterUrl = posterUrl
