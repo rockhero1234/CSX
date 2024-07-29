@@ -7,8 +7,8 @@ import com.lagradost.cloudstream3.network.CloudflareKiller
 
 
 class Full4MoviesProvider : MainAPI() { // all providers must be an instance of MainAPI
-    override var mainUrl = "https://www.full4movies.college"
-    override var name = "Full4Movies"
+    override var mainUrl = "https://www.binged.com/"
+    override var name = "binged"
     override val hasMainPage = true
     override var lang = "hi"
     override val hasDownloadSupport = true
@@ -19,11 +19,7 @@ class Full4MoviesProvider : MainAPI() { // all providers must be an instance of 
     )
 
     override val mainPage = mainPageOf(
-        "$mainUrl/page/%d/" to "Home",
-        "$mainUrl/category/web-series/page/%d/" to "Web Series",
-        "$mainUrl/category/south-indian-hindi-dubbed-movies/page/%d/" to "South Hindi Dubbed",
-        "$mainUrl/category/bollywood-movies-download/page/%d/" to "Bollywood Movies",
-        "$mainUrl/category/hollywood-movies/page/%d/" to "Hollywood Movies",
+        "$mainUrl/streaming-premiere-dates/?mode=streaming-now&page=%d" to "Now streaming",
     )
 
     override suspend fun getMainPage(
@@ -31,7 +27,7 @@ class Full4MoviesProvider : MainAPI() { // all providers must be an instance of 
         request: MainPageRequest
     ): HomePageResponse {
         val document = app.get(request.data.format(page), interceptor = cfInterceptor).document
-        val home = document.select("div.article-content-col").mapNotNull {
+        val home = document.select("div.bng-movies-table-item").mapNotNull {
             it.toSearchResult()
         }
         return newHomePageResponse(request.name, home)
