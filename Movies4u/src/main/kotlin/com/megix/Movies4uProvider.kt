@@ -9,7 +9,7 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.google.gson.Gson
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import okhttp3.FormBody
-
+import android.util.log
 class Movies4uProvider : MainAPI() { // all providers must be an instance of MainAPI
     override var mainUrl = "https://www.movies4u.com.vc"
     override var name = "Movies4u"
@@ -229,6 +229,7 @@ class Movies4uProvider : MainAPI() { // all providers must be an instance of Mai
             )
             val body = FormBody.Builder().add("hash", value).build()
             val doc2 = app.post(source, requestBody = body).document
+            Log.d("doc:",doc2.toString())
             doc2.select("a:matches((?i)(Download Server))").mapNotNull { aTag->
                 val link = aTag.attr("href")
                 callback.invoke(
