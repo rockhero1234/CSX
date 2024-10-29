@@ -9,7 +9,8 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.google.gson.Gson
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import okhttp3.FormBody
-import android.util.log
+import android.util.Log
+
 class Movies4uProvider : MainAPI() { // all providers must be an instance of MainAPI
     override var mainUrl = "https://www.movies4u.com.vc"
     override var name = "Movies4u"
