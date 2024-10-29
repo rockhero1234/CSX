@@ -228,8 +228,11 @@ class Movies4uProvider : MainAPI() { // all providers must be an instance of Mai
                     getIndexQuality(quality),
                 )
             )
+            val cookie= mapOf(
+            	"sc_is_visitor_unique" to "rx13035836.1730208553.282733314ECD4AC9A675082E39722633.2.1.1.1.1.1.1.1.1"
+            )
             val body = FormBody.Builder().add("hash", value).build()
-            val doc2 = app.post(source, requestBody = body).document
+            val doc2 = app.post(source, requestBody = body,cookies=cookie).document
             Log.d("doc:",doc2.toString())
             doc2.select("a:matches((?i)(Download Server))").mapNotNull { aTag->
                 val link = aTag.attr("href")
