@@ -234,7 +234,9 @@ class Movies4uProvider : MainAPI() { // all providers must be an instance of Mai
             val header = mapOf(
             	"Referer" to "$source"
             )
-            val body = FormBody.Builder().add("hash", value).build()
+            val body = mapOf(
+            	"hash" to "$value"
+            )
             val doc2 = app.post(source, requestBody = body,cookies=cookie,headers=header).document
             Log.d("doc:",doc2.toString())
             doc2.select("a:matches((?i)(Download Server))").mapNotNull { aTag->
