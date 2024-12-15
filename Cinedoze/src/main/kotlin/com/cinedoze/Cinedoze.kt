@@ -121,14 +121,14 @@ class Cinedoze : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-    	  val purl= "https://savelinks.me/"
+    	 val purl= "https://savelinks.me/"
     	    var cookies = mapOf(
     	    	"XSRF-TOKEN" to "eyJpdiI6IjhnbkZNd2R4NHo2SFZGRFIyVytQd2c9PSIsInZhbHVlIjoiTmw4czRoLy9PdHp4TVhHMVF2NjJiYUJac2F4NkszYVh6anRpL1BIVjhtR0QzaG85MEdaMWNKbFgyZmRhMkRRMDJhck4wazZPd0hiSW5IOHhPcVJ5SGxZU1pUU3RQdjY5Q2lySnR3UUUzUU16bzBnMWNhcmx3NzBGS0RtZHhubDIiLCJtYWMiOiIyMzcyY2I2NDA5YjExMTc0ZjYwMmU5NjVhN2UyYzE3YmZiZjM3NDllOTA1YjI4YTg5MjY1ZmVlYWRkYjU1OGE0IiwidGFnIjoiIn0%3D",
 				"savelinks_session" to "eyJpdiI6Im9GWXNQUyszM01NSUJqeDBQcXRHTXc9PSIsInZhbHVlIjoiZUxHTDlhR2tyWFpRQ09jK283ZTFqMEdFWUVGUG5vVlRjZlNPU0RicmQ0UlhIVTdMK1JFWG1mVmtIeU9qbHRLTURKRnd0L0ZuNzZtMlBSeXU4OUlVMzdUc0hMQ2s0Q1Y3Vk5SbWRCek9XUldqdU55M3ZQaDVFQXVxYmg0WTR4ZnUiLCJtYWMiOiI3ZGEwNDdkMjhjZGQ1MWQ2YTc0MzdlMzU2MjNkNDZmMTE3OWM1MmNlNDgxNGM5NTlkMWU0NTA4NTIxODI4MWEwIiwidGFnIjoiIn0%3D"
     	    )
     	    var doc= app.get(data).document
     	    doc.select("a[href^=https://cinedoze.com/links/]").map{
-	            val id = app.get(it.attr("href")).url.substringAfter("view/")
+	          /*  val id = app.get(it.attr("href")).url.substringAfter("view/")
 	          
 	           // Log.d("id",id)
 	            val tounlock= purl+id+"/unlock"
@@ -143,6 +143,7 @@ class Cinedoze : MainAPI() {
 				    ).document
 		   // Log.d("doc:",doc1.toString())
 		    //Log.d("test:1",doc1.select("a").toString())
+		  */ val doc1=  app.get(it.attr("href")).document
 		   val source = doc1.select("a.break-words")
 		       source.map{
                   // Log.d("source:",source)
