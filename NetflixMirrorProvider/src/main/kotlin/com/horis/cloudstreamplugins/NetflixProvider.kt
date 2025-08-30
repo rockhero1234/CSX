@@ -44,9 +44,9 @@ class NetflixProvider : MainAPI() {
             "hd" to "on"
         )
         val document = app.get(
-            "$mainUrl/tv/home",
+            "$mainUrl/home",
             cookies = cookies,
-            referer = "$mainUrl/tv/home",
+            referer = "$mainUrl/home",
         ).document
         val items = document.select(".lolomoRow").map {
             it.toHomePageList()
